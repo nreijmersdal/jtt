@@ -15,19 +15,28 @@ import javax.swing.JOptionPane;
 /**
  * Java Time Tracker
  */
-public class App 
-{
+public class App {  
+    public static void main( String[] args ) throws InterruptedException {
+        
+        TimeTracker timeTracker = new TimeTracker();
+        timeTracker.startTray();
+        
+    }
+}
 
-    static Boolean taskRunning = false;
-    static Boolean showWarning = false;
-    static int showWarningTime = 1000 * 60 * 10;
-    static long idleSince = new Date().getTime();
-    static final Image idleIcon    = Toolkit.getDefaultToolkit().getImage("icon_idle.png");
-    static final Image startIcon   = Toolkit.getDefaultToolkit().getImage("icon_working.png");
-    static final Image warningIcon = Toolkit.getDefaultToolkit().getImage("icon_warning.png");
-    static TrayIcon trayIcon = new TrayIcon(idleIcon);
+class TimeTracker {
+    
+    Boolean taskRunning = false;
+    Boolean showWarning = false;
+    int showWarningTime = 1000 * 60 * 10;
+    long idleSince = new Date().getTime();
+    
+    Image idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_idle.png"));
+    Image startIcon   = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_working.png"));
+    Image warningIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_warning.png"));
+    TrayIcon trayIcon = new TrayIcon(idleIcon);
 
-    private static void startTask() {
+    private void startTask() {
         if(taskRunning == false) {
             String task = JOptionPane.showInputDialog(null, "Task description:", "Start new task", JOptionPane.PLAIN_MESSAGE);
             if( task != null) {
@@ -39,8 +48,7 @@ public class App
         }
     }
     
-    public static void main( String[] args ) throws InterruptedException
-    {
+    public void startTray() throws InterruptedException {
         if (SystemTray.isSupported()) {
             
             final SystemTray tray = SystemTray.getSystemTray();
