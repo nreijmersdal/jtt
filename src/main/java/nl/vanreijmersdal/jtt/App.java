@@ -1,6 +1,7 @@
 package nl.vanreijmersdal.jtt;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -28,13 +29,12 @@ class TimeTracker {
     
     Boolean taskRunning = false;
     Boolean showWarning = false;
-    int showWarningTime = 1000 * 60 * 10;
+    int showWarningTime = 5000;
     long idleSince = new Date().getTime();
     
-    Image idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_idle.png"));
-    Image startIcon   = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_working.png"));
-    Image warningIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_warning.png"));
-    TrayIcon trayIcon = new TrayIcon(idleIcon);
+    Image idleIcon, startIcon, warningIcon;
+    TrayIcon trayIcon = null;
+   
 
     private void startTask() {
         if(taskRunning == false) {
@@ -49,9 +49,20 @@ class TimeTracker {
     }
     
     public void startTray() throws InterruptedException {
+
         if (SystemTray.isSupported()) {
             
             final SystemTray tray = SystemTray.getSystemTray();
+
+            Dimension trayIconSize = tray.getTrayIconSize();
+            idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_idle.png"));
+            idleIcon = idleIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
+            startIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_working.png"));
+            startIcon = startIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
+            warningIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_warning.png"));
+            warningIcon = warningIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
+
+            trayIcon = new TrayIcon(idleIcon);
             trayIcon.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     startTask();
