@@ -27,8 +27,8 @@ public class App {
 
 class TimeTracker {
     
-    Boolean taskRunning = false;
-    Boolean showWarning = false;
+    boolean taskRunning = false;
+    boolean showWarning = false;
     int showWarningTime = 5000;
     long idleSince = new Date().getTime();
     
