@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class App {  
     public static void main( String[] args ) throws InterruptedException {
-        
+              
         TimeTracker timeTracker = new TimeTracker();
         timeTracker.startTray();
         
@@ -29,18 +29,19 @@ class TimeTracker {
     
     boolean taskRunning = false;
     boolean showWarning = false;
-    int showWarningTime = 5000;
+    int showWarningTime = 4000;
     long idleSince = new Date().getTime();
     
     Image idleIcon, startIcon, warningIcon;
     TrayIcon trayIcon = null;
+    Notification notify = new Notification();
    
 
     private void startTask() {
         if(taskRunning == false) {
             String task = JOptionPane.showInputDialog(null, "Task description:", "Start new task", JOptionPane.PLAIN_MESSAGE);
             if( task != null) {
-                trayIcon.displayMessage(null, "Started task: " + task, TrayIcon.MessageType.INFO);
+                notify.showNotification("Started task: " + task, true);
                 trayIcon.setImage(startIcon);
                 showWarning = false;
                 taskRunning = true;
@@ -88,11 +89,6 @@ class TimeTracker {
                 }
             });
             
-            MenuItem history = new MenuItem("History");
-            popup.add(history);
-            MenuItem settings = new MenuItem("Settings");
-            popup.add(settings);
-
             MenuItem exit = new MenuItem("Exit");
             exit.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -118,15 +114,11 @@ class TimeTracker {
                 } else {
                   trayIcon.setImage(idleIcon);                                         
                 }
-                Thread.sleep(300); // Prevents 100% CPU usage for while(true)
-                if(showWarning){
-                  trayIcon.setImage(warningIcon);
-                  Thread.sleep(200);
-                }
-                
+                Thread.sleep(100); // Prevents 100% CPU usage for while(true)
+               
                 long currentTime = new Date().getTime();
                 if(currentTime - idleSince > showWarningTime && !taskRunning && !showWarning) {
-                  trayIcon.displayMessage(null, "Not working on a task? Double click\nthe icon to start a new task.", TrayIcon.MessageType.INFO);
+                  notify.showNotification("Not working on a task?", false);
                   showWarning = true;
                   idleSince = new Date().getTime();
                 }
