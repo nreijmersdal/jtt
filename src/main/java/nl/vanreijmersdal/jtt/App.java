@@ -35,7 +35,6 @@ class TimeTracker {
     Image idleIcon, startIcon, warningIcon;
     TrayIcon trayIcon = null;
     Notification notify = new Notification();
-   
 
     private void startTask() {
         if(taskRunning == false) {
@@ -65,6 +64,7 @@ class TimeTracker {
 
             trayIcon = new TrayIcon(idleIcon);
             trayIcon.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     startTask();
                 }
@@ -73,6 +73,7 @@ class TimeTracker {
             PopupMenu popup = new PopupMenu();
             MenuItem start = new MenuItem("Start");
             start.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     startTask();
                 }
@@ -82,6 +83,7 @@ class TimeTracker {
             MenuItem stop = new MenuItem("Stop");
             popup.add(stop);
             stop.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     taskRunning = false;
                     idleSince = new Date().getTime();
@@ -91,6 +93,7 @@ class TimeTracker {
             
             MenuItem exit = new MenuItem("Exit");
             exit.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO Save current state to disk
                     tray.remove(trayIcon);
@@ -109,20 +112,16 @@ class TimeTracker {
             }
             
             while(true) {
-                if(taskRunning) {
-                  trayIcon.setImage(startIcon);                     
-                } else {
-                  trayIcon.setImage(idleIcon);                                         
-                }
-                Thread.sleep(100); // Prevents 100% CPU usage for while(true)
-               
                 long currentTime = new Date().getTime();
                 if(currentTime - idleSince > showWarningTime && !taskRunning && !showWarning) {
                   notify.showNotification("Not working on a task?", false);
                   showWarning = true;
                   idleSince = new Date().getTime();
                 }
+                Thread.sleep(100); // Prevents 100% CPU usage for while(true). TODO replace with wait()/notify() system?               
             }            
+        } else {
+            System.out.println("Could not start tray application");
         }
     }
 }
