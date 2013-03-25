@@ -23,10 +23,15 @@ import javax.swing.JOptionPane;
  * Java Time Tracker
  */
 public class App {
-    static TimeTracker timeTracker = new TimeTracker();;
+    static TimeTracker timeTracker;
     
     public static void main( String[] args ) throws InterruptedException {
-              
+        
+        if(args.length == 0) {      
+            timeTracker = new TimeTracker();            
+        } else {
+            timeTracker = new TimeTracker(args[0]);
+        }
         timeTracker.startTray();
         
     }
@@ -36,16 +41,23 @@ class TimeTracker {
     
     boolean taskRunning = false;
     boolean showWarning = false;
-    int showWarningTime = 4000;
+    int showWarningTime = 1000;
     long idleSince = new Date().getTime();
     long startTime;
-    String outputFilename = "timetracker.log";
-    File file = new File(outputFilename);
+    File outputFile;
     
     Image idleIcon, startIcon;
     TrayIcon trayIcon = null;
     Notification notify = new Notification();
 
+    TimeTracker() {
+        outputFile = new File("timetracker.log");
+    }
+    
+    TimeTracker(String fileName) {
+        outputFile = new File(fileName);
+    }
+    
     public void startTask() {
         if(taskRunning == false) {
             taskRunning = true;
@@ -56,19 +68,17 @@ class TimeTracker {
                 trayIcon.setImage(startIcon);
                 BufferedWriter output;
                 try {
-                    output = new BufferedWriter(new FileWriter(file, true)); 
+                    output = new BufferedWriter(new FileWriter(outputFile, true)); 
                     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
                     output.append(dateFormat.format(startTime) + "\t" + task);
                     output.close();
                 } catch (IOException ex) {
                     //
                 }
-                if(showWarning) {
-                    resetWarning();
-                }
             } else {
                 taskRunning = false;
             }
+            resetWarning();
         }
     }
 
@@ -79,7 +89,7 @@ class TimeTracker {
             trayIcon.setImage(idleIcon);
             BufferedWriter output;
             try {
-                output = new BufferedWriter(new FileWriter(file, true));
+                output = new BufferedWriter(new FileWriter(outputFile, true));
                 output.append("\t" + timeSpend(new Date().getTime() - startTime));
                 output.newLine();
                 output.close();
@@ -152,7 +162,7 @@ class TimeTracker {
             while(true) {
                 long currentTime = new Date().getTime();
                 if(currentTime - idleSince > showWarningTime && !taskRunning && !showWarning) {
-                  notify.showNotification("Click here to start working!", 30000);
+                  notify.showNotification("Click here to start tracking working!", 5000);
                   showWarning = true;
                 }
                 Thread.sleep(100); // Prevents 100% CPU usage for while(true). TODO replace with wait()/notify() system?               
