@@ -83,7 +83,10 @@ public class Notification {
             public void actionPerformed(ActionEvent ae) {
                 dialog.dispose();
                 timer.stop();
-            }
+                 if(App.timeTracker.showWarning) {
+                    App.timeTracker.resetWarning();
+                 }
+           }
         };
         timer = new Timer(hideInXMilliSeconds, action);
         timer.start();
