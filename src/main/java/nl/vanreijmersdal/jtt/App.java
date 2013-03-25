@@ -32,7 +32,7 @@ class TimeTracker {
     int showWarningTime = 4000;
     long idleSince = new Date().getTime();
     
-    Image idleIcon, startIcon, warningIcon;
+    Image idleIcon, startIcon;
     TrayIcon trayIcon = null;
     Notification notify = new Notification();
 
@@ -55,13 +55,16 @@ class TimeTracker {
             final SystemTray tray = SystemTray.getSystemTray();
 
             Dimension trayIconSize = tray.getTrayIconSize();
-            idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_idle.png"));
-            idleIcon = idleIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
-            startIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_working.png"));
-            startIcon = startIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
-            warningIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon_warning.png"));
-            warningIcon = warningIcon.getScaledInstance(trayIconSize.width, trayIconSize.height, Image.SCALE_SMOOTH);
-
+ 
+            String OS = System.getProperty("os.name").toLowerCase();
+            if(OS.indexOf("linux") >= 0) {
+                idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("logo_22px.png"));
+                startIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("task_22px.png"));
+            } else { 
+                idleIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("logo_16px.png"));
+                startIcon = Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("task_16px.png"));
+            }
+                       
             trayIcon = new TrayIcon(idleIcon);
             trayIcon.addActionListener(new ActionListener() {
                 @Override

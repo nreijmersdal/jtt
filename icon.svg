@@ -7,6 +7,7 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="744.09448819"
@@ -19,7 +20,57 @@
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       id="linearGradient3797">
+      <stop
+         style="stop-color:#fbfbec;stop-opacity:1;"
+         offset="0"
+         id="stop3799" />
+      <stop
+         style="stop-color:#fffc95;stop-opacity:0;"
+         offset="1"
+         id="stop3801" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3797"
+       id="linearGradient3803"
+       x1="227.29448"
+       y1="325.43115"
+       x2="330.56227"
+       y2="325.43115"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3797-7"
+       id="linearGradient3803-4"
+       x1="227.29448"
+       y1="325.43115"
+       x2="330.56226"
+       y2="325.43115"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3797-7">
+      <stop
+         style="stop-color:#008f26;stop-opacity:1;"
+         offset="0"
+         id="stop3799-8" />
+      <stop
+         id="stop3847"
+         offset="1"
+         style="stop-color:#7fc55d;stop-opacity:0.49803922;" />
+    </linearGradient>
+    <linearGradient
+       y2="325.43115"
+       x2="330.56226"
+       y1="325.43115"
+       x1="227.29448"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3824"
+       xlink:href="#linearGradient3797-7"
+       inkscape:collect="always" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,8 +79,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="105.98175"
-     inkscape:cy="661.83348"
+     inkscape:cx="325.83147"
+     inkscape:cy="714.3953"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -136,6 +187,66 @@
        id="path4152"
        inkscape:connector-curvature="0"
        inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_warning.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient3803);fill-opacity:1;stroke:#000000;stroke-width:3.84811265;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3017"
+       sodipodi:cx="278.92838"
+       sodipodi:cy="325.43115"
+       sodipodi:rx="50.633896"
+       sodipodi:ry="43.815365"
+       d="m 329.56227,325.43115 a 50.633896,43.815365 0 1 1 -101.26779,0 50.633896,43.815365 0 1 1 101.26779,0 z"
+       transform="matrix(0.96695166,0,0,1.1174283,7.5842255,-43.399477)"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_idle.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#707070;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;opacity:0.12831858"
+       d="m 238.92857,290.21933 c 41.31861,6.75272 78.90754,16.32543 81.78571,52.14286 15.42359,-33.40291 -1.63847,-55.66994 -19.28571,-64.64286 -22.97236,-13.33229 -46.17771,-5.51803 -62.5,12.5 z"
+       id="path3787"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_idle.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.64284372;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 278.13457,282.82379 0.204,41.79337 -36.72497,0.23424"
+       id="path3805"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_idle.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient3824);fill-opacity:1.0;stroke:#000000;stroke-width:3.84811258000000000;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3017-5"
+       sodipodi:cx="278.92838"
+       sodipodi:cy="325.43115"
+       sodipodi:rx="50.633896"
+       sodipodi:ry="43.815365"
+       d="m 329.56227,325.43115 a 50.633896,43.815365 0 1 1 -101.26779,0 50.633896,43.815365 0 1 1 101.26779,0 z"
+       transform="matrix(0.96695166,0,0,1.1174283,139.9066,-44.149463)"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_working.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="opacity:0.12831858;fill:#707070;fill-opacity:1;stroke:none"
+       d="m 371.25095,289.46934 c 41.31861,6.75272 78.90754,16.32543 81.78571,52.14286 15.42359,-33.40291 -1.63847,-55.66994 -19.28571,-64.64286 -22.97236,-13.33229 -46.17771,-5.51803 -62.5,12.5 z"
+       id="path3787-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_working.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.64284372;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 410.45695,282.0738 0.204,41.79337 -36.72497,0.23424"
+       id="path3805-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\niels\gitcheckout\jtt\src\main\resources\icon_working.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
   </g>
