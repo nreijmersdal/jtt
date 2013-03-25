@@ -18,7 +18,7 @@ import javax.swing.Timer;
  */
 public class Notification {
     Timer timer;
-    int x, y, offSetX, offSetY, yLocation;
+    int x, y, offSetX, offSetY, osLocation;
     
     public Notification() {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -27,20 +27,27 @@ public class Notification {
         
         String OS = System.getProperty("os.name").toLowerCase();
         if(OS.indexOf("win") >= 0) {
+            // Show notifications bottom right
             y = (int) rect.getMaxY();
             offSetY = -50;
-            yLocation = -1;
-        } else {
+            osLocation = -1;
+        } else { 
+            // Other operating systems Mac OS X and Linux
+            // Show notifications top right
             y = 0;
-            yLocation = 0;
+            osLocation = 0;
             offSetY = 50;
         }
         x = (int) rect.getMaxX();
         offSetX = -25;
     }
     
-    public void showNotification(String message, final boolean hide) {
-        String html = "<html><body style='padding:15px;border: #ffffff solid 2px'>" + message + "</body></html>";
+    public void showNotification(String message, final boolean autoHide) {
+        String html = "<html>"
+                    + " <body style='padding:15px;border: #ffffff solid 2px'>"
+                    +       message
+                    + " </body>"
+                    + "</html>";
         
         JLabel text = new JLabel();
         text.setForeground(Color.WHITE);
@@ -58,17 +65,18 @@ public class Notification {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dialog.dispose();
-                if(hide) {
+                if(autoHide) {
                     timer.stop();
                 }
             }
         };
         dialog.addMouseListener(mouse);
         
-        dialog.setLocation(x - dialog.getWidth() + offSetX, y + (dialog.getHeight() * yLocation) + offSetY);
+        dialog.setLocation(x - dialog.getWidth() + offSetX, y + (dialog.getHeight() * osLocation) + offSetY);
         dialog.setVisible(true);
-        if(hide) {      
+        if(autoHide) {      
             ActionListener action = new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent ae) {
                     dialog.dispose();
                     timer.stop();
