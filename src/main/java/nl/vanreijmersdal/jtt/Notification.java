@@ -42,9 +42,12 @@ public class Notification {
         offSetX = -25;
     }
     
-    public void showNotification(String message, final boolean autoHide) {
+    public void showNotification(String message, int hideInXMilliSeconds) {
         String html = "<html>"
-                    + " <body style='padding:15px;border: #ffffff solid 2px'>"
+                    + " <body style='"
+                    + "     padding:15px;"
+                    + "     color: #fab80a;"
+                    + " '>"
                     +       message
                     + " </body>"
                     + "</html>";
@@ -57,7 +60,7 @@ public class Notification {
         dialog.setUndecorated(true);
         dialog.getContentPane().add(text, BorderLayout.CENTER); 
         dialog.getContentPane().setBackground(Color.BLACK);
-        dialog.setOpacity(0.80f);
+        dialog.setOpacity((float)0.80);
         dialog.setAlwaysOnTop(true);
         dialog.pack();      
 
@@ -65,8 +68,9 @@ public class Notification {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dialog.dispose();
-                if(autoHide) {
-                    timer.stop();
+                timer.stop();
+                if(App.timeTracker.showWarning) {
+                    App.timeTracker.startTask();
                 }
             }
         };
@@ -74,16 +78,14 @@ public class Notification {
         
         dialog.setLocation(x - dialog.getWidth() + offSetX, y + (dialog.getHeight() * osLocation) + offSetY);
         dialog.setVisible(true);
-        if(autoHide) {      
-            ActionListener action = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    dialog.dispose();
-                    timer.stop();
-                }
-            };
-            timer = new Timer(5000, action);
-            timer.start();
-        }
+        ActionListener action = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                dialog.dispose();
+                timer.stop();
+            }
+        };
+        timer = new Timer(hideInXMilliSeconds, action);
+        timer.start();
     }
 }

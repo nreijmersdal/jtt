@@ -16,10 +16,11 @@ import javax.swing.JOptionPane;
 /**
  * Java Time Tracker
  */
-public class App {  
+public class App {
+    static TimeTracker timeTracker = new TimeTracker();;
+    
     public static void main( String[] args ) throws InterruptedException {
               
-        TimeTracker timeTracker = new TimeTracker();
         timeTracker.startTray();
         
     }
@@ -36,11 +37,11 @@ class TimeTracker {
     TrayIcon trayIcon = null;
     Notification notify = new Notification();
 
-    private void startTask() {
+    public void startTask() {
         if(taskRunning == false) {
             String task = JOptionPane.showInputDialog(null, "Task description:", "Start new task", JOptionPane.PLAIN_MESSAGE);
             if( task != null) {
-                notify.showNotification("Started task: " + task, true);
+                notify.showNotification("Started task: " + task, 3000);
                 trayIcon.setImage(startIcon);
                 showWarning = false;
                 taskRunning = true;
@@ -66,12 +67,6 @@ class TimeTracker {
             }
                        
             trayIcon = new TrayIcon(idleIcon);
-            trayIcon.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    startTask();
-                }
-            });        
             
             PopupMenu popup = new PopupMenu();
             MenuItem start = new MenuItem("Start");
@@ -117,7 +112,7 @@ class TimeTracker {
             while(true) {
                 long currentTime = new Date().getTime();
                 if(currentTime - idleSince > showWarningTime && !taskRunning && !showWarning) {
-                  notify.showNotification("Not working on a task?", false);
+                  notify.showNotification("Not working on a task?", 30000);
                   showWarning = true;
                   idleSince = new Date().getTime();
                 }
